@@ -32,8 +32,11 @@ jobs:
         path: website/**
         if-no-files-found: warn
 
-  deploy: 
+  deployment: 
     runs-on: ubuntu-latest
+    environment: 
+      name: Azure
+      url: https://githubapp-23817415.azurewebsites.net/
     needs: build 
     steps:
     - name: Download a Build Artifact
@@ -45,5 +48,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: GitHubApp-23817415
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_ENV  }}
         package: webapp
